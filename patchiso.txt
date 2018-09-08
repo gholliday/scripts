@@ -1,0 +1,26 @@
+:: Use this script to "slipstream" update a Windows 10/Server 2016 ISO image with the latest cumulative update
+:: 
+:: https://msdn.microsoft.com/en-us/library/ff794819.aspx
+
+1. Download latest cumulative update from https://support.microsoft.com/en-us/help/4000825
+
+2. Mount ISO
+
+3. Copy ISO contents to a local folder: d:\Win10iso
+
+4. make a directory to mount the WIM in
+mkdir d:\temp\Win10Mount
+
+5. Mount the WIM
+DISM /Mount-Wim /WimFile:d:\Win10iso\sources\install.wim /mountdir:d:\temp\Win10Mount
+
+6. Apply any updates
+dism /image:d:\temp\Win10Mount /add-package /packagepath:"E:\media\Windows\WindowsTH-RSAT_WS2016-x64.msu"
+dism /image:d:\temp\Win10Mount /add-package /packagepath:"E:\media\Windows\windows10.0-kb3216755-x64_eba0675fd22087449c80b4d26df6b7035e9fb91f.msu"
+
+7. Commit the image
+DISM /Unmount-Wim /MountDir:d:\temp\Win10Mount /Commit
+
+8. Create an ISO with UEFI boot image
+oscdimg -m -o -u2 –udfver102 -bootdata:2#p0,e,bd:\Win10Mount\boot\etfsboot.com#pEF,e,bd:\Win10Mount\efi\microsoft\boot\efisys.bin d:\Win10Mount d:\Win10Patched.iso
+

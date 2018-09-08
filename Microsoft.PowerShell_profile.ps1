@@ -1,0 +1,2 @@
+# Add TLS 1.2 as an available protocol, otherwise you're stuck with TLS 1.0, because... .NET 4.5
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
