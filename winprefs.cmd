@@ -195,7 +195,11 @@ REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\TabletTip\1.7" /v EnableAutocorrec
 pkgmgr /iu:"TelnetClient"
 
 :: Skype for Business options
+REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\office\16.0\Lync /t REG_DWORD /v EnableSIPHighSecurityMode /d 0 /f
 REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\office\16.0\Lync /t REG_DWORD /v EnableAppearOffline /d 1 /f
+
+:: Outlook - Open replies and forwards in a new window
+REG ADD HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Outlook\Message /v DisableReadingPaneCompose /t REG_DWORD /d 1 /f
 
 :: Disable Office apps Start screen & What's new popups
 REG ADD HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\General /v DisableBootToOfficeStart /t REG_DWORD /d 1 /f
