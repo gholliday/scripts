@@ -219,6 +219,11 @@ REG ADD HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Outlook\Preferences /v 
 :: Copy PowerShell Profile
 xcopy /s /y %~dp0Microsoft.PowerShell_profile.ps1 "%USERPROFILE%\Documents\WindowsPowerShell\"
 
+:: Enable Credential Guard
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 1 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d 1 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LsaCfgFlags /t REG_DWORD /d 1 /f
+
 :: Disable TLS 1.0 & TLS 1.1.
 :::::::::::::::::::::::::::::::: Warning ::::::::::::::::::::::::::::::::
 :: This will break anything that does not support TLS 1.2. Mostly .NET apps. See SystemDefaultTlsVersions
