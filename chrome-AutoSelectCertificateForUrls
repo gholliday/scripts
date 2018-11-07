@@ -1,0 +1,1 @@
+reg add HKCU\Software\Policies\Google\Chrome\AutoSelectCertificateForUrls /f /t REG_SZ /v 1 /d "{"""pattern""":"""https://certauth.msft.sts.microsoft.com""","""filter""":{"""ISSUER""":{"""CN""":"""Windows Hello PIN - MSIT1"""}}}"
